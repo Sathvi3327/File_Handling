@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<conio.h>
+main()
+{
+	  FILE *fp1,*fp2;
+	  char ch,filename[50];
+	  int i,cnt;
+	  fp1 = fopen("MyCaptain.txt","r");                        //Reading contents of the file
+	  fseek(fp1,0,SEEK_END);
+    cnt = ftell(fp1);                                        //To get the position of file pointer
+    while( i < cnt )
+    {
+        i++;
+        fseek(fp1,-i,SEEK_END);
+        printf("%c",fgetc(fp1));                             //printing contents of the file in reverse order
+    }
+  	printf("\nEnter the filename to open for writing: \n");       
+    scanf("%s", filename);
+	  fp2 = fopen("filename","w");                             //Writing contents to the file
+	  while (ch != EOF) 
+    { 
+        ch = fgetc(fp1);
+		    fputc(ch, fp2);  
+    } 
+    printf("\nContents copied to %s", filename);             //Contents copied to the file
+    fclose(fp1);
+    fclose(fp2);                                             //Closing files 1 & 2
+    return 0;
+}
